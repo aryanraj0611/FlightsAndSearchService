@@ -37,18 +37,24 @@ class  CrudRepository{
             throw error;
         }
     }
-    async getAll(data) {
+    async getAll() {
         try {
-
+            const result = await this.model.findAll();
+            return result;
         }
         catch(error) {
             console.log("Something went wrong in repository layer");
             throw error;
         }
     }
-    async update(data) {
+    async update(modelId, data) {
         try {
-
+            const result = await this.model.update(data, {
+                where:{
+                    id: modelId
+                },
+            });
+            return result;
         }
         catch(error) {
             console.log("Something went wrong in repository layer");
@@ -56,3 +62,5 @@ class  CrudRepository{
         }
     }
 }
+
+module.exports = CrudRepository;
